@@ -1,6 +1,6 @@
 {
   "name": "ci-npm-publish",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "auto publish to npm from your ci",
   "main": "index.js",
   "repository": {
@@ -18,5 +18,8 @@
     "npm-registry-client": "^6.1.1",
     "semver": "^4.3.1",
     "underscore": "^1.8.2"
+  },
+  "bin": {
+    "ci-npm-publish": "./index.js"
   }
 }

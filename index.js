@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+"use strict";
+
 var Npm = require("npm"),
     Path = require("path"),
     Fs = require("fs"),
@@ -44,7 +47,7 @@ var publish = function() {
         metadata: configJSON
       }
 
-      publishParams = _.extend(publishParams, opts);
+      var publishParams = _.extend(publishParams, opts);
       client.publish(uri, publishParams, function(err, response){
         if (err) {
           console.log(err);
@@ -86,8 +89,8 @@ var pkgeUp = function(){
     }
 
     // set versions
-    currentVersion = configJSON.version;
-    availableVersion = tags.latest;
+    var currentVersion = configJSON.version,
+        availableVersion = tags.latest;
 
     // see if this version is newer than npm
     if (Semver.gte(currentVersion, availableVersion)) {
