@@ -88,12 +88,13 @@ var pkgeUp = function(){
       throw err;
     }
 
+
     // set versions
     var currentVersion = configJSON.version,
         availableVersion = tags.latest;
 
     // see if this version is newer than npm
-    if (Semver.gte(currentVersion, availableVersion)) {
+    if (Semver.gt(currentVersion, availableVersion)) {
       publish();
     } else {
       process.exit(0);
