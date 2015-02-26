@@ -1,14 +1,19 @@
 {
   "name": "ci-npm-publish",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "auto publish to npm from your ci",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NewSpring/ci-npm-publish.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "npm": "^2.6.0",
     "npm-registry-client": "^6.1.1",
     "semver": "^4.3.1",
     "underscore": "^1.8.2"

@@ -80,7 +80,7 @@ var publish = function() {
 
 */
 var distTagsParams = {
-  package: "normajs"
+  package: config.name
 }
 
 distTagsParams = _.extend(distTagsParams, auth)
