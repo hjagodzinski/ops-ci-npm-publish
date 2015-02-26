@@ -7,77 +7,23 @@ var Npm = require("npm"),
     Exec = require('child_process').exec,
     Flags = require("minimist")( process.argv.slice(2) ),
     client = new RegClient(),
-    // config = require(Path.join(process.cwd(), "package.json")),
+
+    // local vars
     uri = "https://registry.npmjs.org/",
-    user = false,
-    password = false,
-    email = false,
-    config = process.cwd(),
-    opts = {};
-    // user = process.env.NPMUSER,
-    // password = process.env.NPMPASSWORD,
-    // email = process.env.NPMEMAIL,
-    // auth = {},
-    // tarball = configJSON.name + "-" + configJSON.version + ".tgz",
-    // bodyPath = Path.join(process.cwd(), tarball);
-
-
-/*
-
-  Map data from optional flags and set defaults
-  @todo Could be more elegant
-
-*/
-// Auth creds from command line flags
-if (Flags.npmuser || Flags.NPMUSER) {
-  user = Flags.npmuser || Flags.NPMUSER
-}
-
-if (Flags.npmpassword || Flags.NPMPASSWORD) {
-  password = Flags.npmpassword || Flags.NPMPASSWORD
-}
-
-if (Flags.npmemail || Flags.NPMEMAIL) {
-  email = Flags.npmemail || Flags.NPMEMAIL
-}
-
-
-// empty object, or undefined
-opts = {
-  user: user || process.env.NPMUSER,
-  password: password || process.env.NPMPASSWORD,
-  email: email || process.env.NPMEMAIL
-}
-
-
-if (Flags.npmpassword || Flags.NPMPASSWORD) {
-  password = Flags.npmpassword || Flags.NPMPASSWORD
-}
-
-if (Flags.config) {
-  config = Flags.config
-}
-
-var configJSON = require(Path.join(config, "package.json")),
+    user = Flags.npmuser || Flags.NPMUSER || process.env.NPMUSER,
+    password = Flags.npmpassword || Flags.NPMPASSWORD || process.env.NPMPASSWORD,
+    email = Flags.npmemail || Flags.NPMEMAIL || process.env.NPMEMAIL,
+    config = Flags.config || process.cwd(),
+    opts = {
+      auth: {
+        username: user,
+        password: password,
+        email: email
+      }
+    },
+    configJSON = require(Path.join(config, "package.json")),
     tarball = configJSON.name + "-" + configJSON.version + ".tgz",
     bodyPath = Path.join(config, tarball);
-
-
-// require tarball
-if (!Fs.existsSync(bodyPath)) {
-  // console.log("no tarball! can't stream publish")
-  Exec("npm pack", {cwd: config}, function(err, stdout, stderr){
-
-    if (err) {
-      console.log(err, stderr);
-      throw err
-    }
-
-    pkgeUp()
-  })
-} else {
-  pkgeUp()
-}
 
 
 // create user and publish
@@ -89,7 +35,7 @@ var publish = function() {
       console.log(err);
       throw err
     }
-
+    var body = Fs.createReadStream(bodyPath, "base64");
     // authenticated or created, ready to publish
     if (data.ok) {
       publishParams = {
@@ -153,4 +99,22 @@ var pkgeUp = function(){
 
 
   })
+}
+
+
+
+// require tarball
+if (!Fs.existsSync(bodyPath)) {
+  // console.log("no tarball! can't stream publish")
+  Exec("npm pack", {cwd: config}, function(err, stdout, stderr){
+
+    if (err) {
+      console.log(err, stderr);
+      throw err
+    }
+
+    pkgeUp()
+  })
+} else {
+  pkgeUp()
 }

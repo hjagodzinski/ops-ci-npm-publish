@@ -1,6 +1,6 @@
 {
   "name": "ci-npm-publish",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "auto publish to npm from your ci",
   "main": "index.js",
   "repository": {
