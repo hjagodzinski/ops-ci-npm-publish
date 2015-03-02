@@ -106,19 +106,37 @@ var pkgeUp = function(){
 }
 
 
+// encode and add readme data to package
+var readmePath = Path.join(config, "README.md")
+if (Fs.existsSync(readmePath)) {
+  var readme = Fs.readFileSync(readmePath, {encoding: "utf8"});
+
+  if (!configJSON.readme) {
+    configJSON.readme = readme
+
+    // Fs.writeFileSync(
+    //   Path.join(config, "package.json"),
+    //   JSON.stringify(configJSON, null, 2)
+    // )
+
+  }
+}
+
+
 
 // require tarball
 if (!Fs.existsSync(bodyPath)) {
+
   // console.log("no tarball! can't stream publish")
   Exec("npm pack", {cwd: config}, function(err, stdout, stderr){
 
     if (err) {
       console.log(err, stderr);
-      throw err
+      throw err;
     }
 
-    pkgeUp()
+    pkgeUp();
   })
 } else {
-  pkgeUp()
+  pkgeUp();
 }
