@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-var Npm = require("npm"),
-    Path = require("path"),
+var Path = require("path"),
     Fs = require("fs"),
     Semver = require("semver"),
     RegClient = require("npm-registry-client"),
