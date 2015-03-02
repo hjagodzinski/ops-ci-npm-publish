@@ -114,11 +114,6 @@ if (Fs.existsSync(readmePath)) {
   if (!configJSON.readme) {
     configJSON.readme = readme
 
-    // Fs.writeFileSync(
-    //   Path.join(config, "package.json"),
-    //   JSON.stringify(configJSON, null, 2)
-    // )
-
   }
 }
 
