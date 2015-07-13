@@ -28,17 +28,17 @@ var Path = require("path"),
     bodyPath = Path.join(config, tarball);
 
 function getTarballName (configJSON) {
-    var version = configJSON.version;
-    var isScoped = (configJSON.name.indexOf('@') === 0);
-    if (isScoped) {
-        var scopeAndName = configJSON.name.repace('@', '').split('/');
-        var scope = scopeAndName[0];
-        var name = scopeAndName[1];
+  var version = configJSON.version;
+  var isScoped = (configJSON.name.indexOf("@") === 0);
+  if (isScoped) {
+    var scopeAndName = configJSON.name.repace("@", "").split("/");
+    var scope = scopeAndName[0];
+    var name = scopeAndName[1];
 
-        return scope + '-' + name + '-' + version;
-    }
+    return scope + "-" + name + "-" + version;
+  }
 
-    return configJSON.name + "-" + version + ".tgz"
+  return configJSON.name + "-" + version + ".tgz"
 }
 
 // create user and publish
