@@ -31,11 +31,11 @@ function getTarballName (configJSON) {
   var version = configJSON.version;
   var isScoped = (configJSON.name.indexOf("@") === 0);
   if (isScoped) {
-    var scopeAndName = configJSON.name.repace("@", "").split("/");
+    var scopeAndName = configJSON.name.replace("@", "").split("/");
     var scope = scopeAndName[0];
     var name = scopeAndName[1];
 
-    return scope + "-" + name + "-" + version;
+    return scope + "-" + name + "-" + version + ".tgz";
   }
 
   return configJSON.name + "-" + version + ".tgz"
