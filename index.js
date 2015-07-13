@@ -24,9 +24,22 @@ var Path = require("path"),
       }
     },
     configJSON = require(Path.join(config, "package.json")),
-    tarball = configJSON.name + "-" + configJSON.version + ".tgz",
+    tarball = getTarballName(configJSON),
     bodyPath = Path.join(config, tarball);
 
+function getTarballName (configJSON) {
+    var version = configJSON.version;
+    var isScoped = (configJSON.name.indexOf('@') === 0);
+    if (isScoped) {
+        var scopeAndName = configJSON.name.repace('@', '').split('/');
+        var scope = scopeAndName[0];
+        var name = scopeAndName[1];
+
+        return scope + '-' + name + '-' + version;
+    }
+
+    return configJSON.name + "-" + version + ".tgz"
+}
 
 // create user and publish
 var publish = function() {
