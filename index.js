@@ -109,6 +109,7 @@ var pkgeUp = function(){
     if (Semver.gt(currentVersion, availableVersion)) {
       publish();
     } else {
+      console.log('Exiting since ' + currentVersion + ' is lower than ' + availableVersion);
       process.exit(0);
       return
     }
