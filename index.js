@@ -11,7 +11,7 @@ var Path = require("path"),
     client = new RegClient(),
 
     // local vars
-    uri = Flags.registry || process.env.registry || "https://registry.npmjs.org/",
+    uri = Flags.npmregistry || process.env.NPMREGISTRY || "https://registry.npmjs.org/",
     user = Flags.npmuser || Flags.NPMUSER || process.env.NPMUSER,
     password = Flags.npmpassword || Flags.NPMPASSWORD || process.env.NPMPASSWORD,
     email = Flags.npmemail || Flags.NPMEMAIL || process.env.NPMEMAIL,
