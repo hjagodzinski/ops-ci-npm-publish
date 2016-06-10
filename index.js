@@ -84,38 +84,7 @@ var pkgeUp = function(){
     return
   }
 
-  /*
-
-    Get tags and compare versions
-
-  */
-  var distTagsParams = {
-    package: configJSON.name
-  }
-
-  distTagsParams = _.extend(distTagsParams, opts)
-  client.distTags.fetch(uri, distTagsParams, function(err, tags){
-    if (err) {
-      console.log(err);
-      throw err;
-    }
-
-
-    // set versions
-    var currentVersion = configJSON.version,
-        availableVersion = tags.latest;
-
-    // see if this version is newer than npm
-    if (Semver.gt(currentVersion, availableVersion)) {
-      publish();
-    } else {
-      console.log('Exiting since ' + currentVersion + ' is lower than ' + availableVersion);
-      process.exit(0);
-      return
-    }
-
-
-  })
+  publish()
 }
 
 
