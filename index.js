@@ -50,7 +50,7 @@ var publish = function() {
       console.log(err);
       throw err
     }
-    var body = Fs.createReadStream(bodyPath, "base64");
+    var body = Fs.createReadStream(bodyPath);
     // authenticated or created, ready to publish
     if (data.ok) {
       publishParams = {
